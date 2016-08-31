@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="de" itemscope itemtype="http://schema.org/WebPage">
+<head>
+
+	<!-- SEO -->
+	<title>DiskStation: ssh mit Private Key statt Passwort</title>
+	<meta name="description" content="Standart mäsig ist der ssh Zugriff auf die DiskStation nur mit Password möglich, wenn man allerdings den SSH zugriff in einigen Scripten benutz und/od">
+
+	<!-- Meta for robots -->
+	<meta charset="UTF-8">
+	<meta name="revisit-after" content="1 days">
+	<meta name="robots" content="index, follow">
+	<meta name="author" content="Raphael">
+	<meta name="generator" content="Jekyll v3.2.1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<!-- Google+ -->
+	<meta itemprop="name" content="DiskStation: ssh mit Private Key statt Passwort">
+	<meta itemprop="description" content="Standart mäsig ist der ssh Zugriff auf die DiskStation nur mit Password möglich, wenn man allerdings den SSH zugriff in einigen Scripten benutz und/od">
+
+	<!-- Open Graph(Facebook, Pinterest) -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="/diskstation-ssh-mit-private-key-statt-passwort">
+	<meta property="og:title" content="DiskStation: ssh mit Private Key statt Passwort">
+	<meta property="og:locale" content="de">
+	<meta property="og:site_name" content="codegents">
+	<meta property="og:description" content="Standart mäsig ist der ssh Zugriff auf die DiskStation nur mit Password möglich, wenn man allerdings den SSH zugriff in einigen Scripten benutz und/od">
+
+	<!-- Twitter -->
+	<meta name="twitter:title" content="DiskStation: ssh mit Private Key statt Passwort">
+	<meta name="twitter:site" content="codegents">
+	<meta name="twitter:url" content="/diskstation-ssh-mit-private-key-statt-passwort">
+	<meta name="twitter:creator" content="Raphael">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:description" content="Standart mäsig ist der ssh Zugriff auf die DiskStation nur mit Password möglich, wenn man allerdings den SSH zugriff in einigen Scripten benutz und/od">
+
+	<!-- If article has a cover photo -->
+	
+
+	<!-- iOS web app -->
+	<meta name="format-detection" content="telephone=yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="DiskStation: ssh mit Private Key statt Passwort">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<!-- Search engine verifications -->
+	
+	
+	
+
+	<!-- Favicon & RSS -->
+	<link rel="icon" href="/assets/img/favicon.ico">
+	<link rel="alternate" type="application/rss+xml" title="codegents" href="/rss.xml">
+
+	<!-- CSS & JS files -->
+	<link rel="stylesheet" href="/assets/css/prod/style.min.css">
+	<script src="/assets/js/prod/prism.min.js"></script>
+	<script src="/assets/js/prod/fastclick.min.js"></script>
+	<script src="/assets/js/prod/init.min.js"></script>
+
+</head>
+<body>
+
+	<!-- Header -->
+	<header>
+
+		<!-- Header container -->
+		<section>
+
+			<!-- Homepage -->
+			<a href=""><i class="icon-home"></i></a>
+
+			<!-- Site name & description -->
+			<div>
+
+				<!-- Display: table -->
+				<div class="dt">
+
+					<!-- Display: table-cell -->
+					<div class="dtc">
+
+						<h3>codegents</h3>
+						<h6>serious business</h6>
+
+					</div><!-- .dtc -->
+
+				</div><!-- .dt -->
+
+			</div><!-- div -->
+
+			<!-- Mail -->
+			<a href="mailto:info@raphaelmutschler.de"><i class="icon-envelope-o"></i></a>
+
+		</section><!-- section -->
+
+	</header><!-- header -->
+
+	<!-- Main -->
+	<main>
+
+		<!-- Main container -->
+		<section>
+
+			<!-- Content -->
+			<!-- Article -->
+<article class="noBorder">
+
+	<!-- Article title -->
+	<h1>DiskStation: ssh mit Private Key statt Passwort</h1>
+
+	<!-- Article date -->
+	<span class="article__date">
+		
+			16 JUNE 2014
+		
+	</span>
+
+	<!-- Article description -->
+	<section><p>Standart mäsig ist der ssh Zugriff auf die DiskStation nur mit Password möglich, wenn man allerdings den SSH zugriff in einigen Scripten benutz und/oder den Zugang allgemeine einfach öfters benötigt, wird das dauernde eintippen des Passworts relativ schnell lästig.</p>
+
+<p>Abhilfe schaft die verbindung per Private Key.</p>
+
+<h2 id="vorbereitung">Vorbereitung</h2>
+
+<p>Zuerst müssen die entsprechenden Keys generiert werden, das geht unter Linux/OS X relativ einfach (<a href="http://kb.siteground.com/how_to_generate_an_ssh_key_on_windows_using_putty/">Anleitung für Windows</a>)  per terminal und dem befehl <code class="highlighter-rouge">ssh-keygen</code>.</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">	ssh-keygen -t rsa -C <span class="s2">"your_email@example.com"</span></code></pre></figure>
+
+<p>danach den Anweisungen folgen und warten bis der Schlüssel generiert wurde.</p>
+
+<p>Wenn alles geklappt hat den Key per</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">	cat ~/.ssh/id_rsa.pub | pbcopy</code></pre></figure>
+
+<p>anzeigen lassen und in die Zwischenablage kopieren.</p>
+
+<h2 id="key-hinzufgen">Key hinzufügen</h2>
+
+<p>Als nächstes muss der Key auf die DiskStation übertragen werden. Dazu wie gewohnt eine ssh Verbindung mit dem gewählten Nutzer erstellen.</p>
+
+<p>Falls nicht bereits vorhanden muss nun der <code class="highlighter-rouge">.ssh</code> ordner sowie die <code class="highlighter-rouge">authorized_keys</code> Datei angelegt werden:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">mkdir ~/.ssh
+chmod 0700 ~/.ssh
+touch ~/.ssh/authorized_keys
+chown -R EUER_BENUTZER ~/.ssh
+chmod 0600 ~/.ssh/authorized_keys</code></pre></figure>
+
+<p>nun muss der zuvor kopierte Key in die <code class="highlighter-rouge">authorized_keys</code> eingetragen werden</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">	nano ~/.ssh/authorized_keys</code></pre></figure>
+
+<p>und den Key einfügen.</p>
+
+<h2 id="ssh-neustarten">ssh neustarten</h2>
+
+<p>Als letzten Schritt muss SSH neu gestartet werden, das geht entweder über DSM oder per terminal mit</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">	/usr/syno/etc.defaults/rc.d/S95sshd.sh restart</code></pre></figure>
+
+<p>nun sollte beim erneuten verbinden mit der DiskStation eine verbindung ohne eingabe eines Passworts möglich sein.</p>
+</section>
+
+</article><!-- article -->
+
+<!-- If addthisId declared -->
+
+
+<!-- If disqusUsername declared -->
+
+
+	<!-- Full width -->
+	<div class="full">
+
+		<!-- Disqus -->
+		<div id="disqus_thread" class="mt mb"></div>
+		<script async src="//codegents.disqus.com/embed.js"></script>
+
+	</div><!-- .full -->
+
+
+
+
+		</section><!-- section -->
+
+	</main><!-- main -->
+
+	<!-- Footer -->
+	<footer>
+
+		<!-- Footer container -->
+		<section>
+
+			<!-- Display: table -->
+			<div class="dt">
+
+				<!-- Display: table-cell -->
+				<div class="dtc h6">
+
+					<!-- Copyright -->
+					<a href="" class="h6">codegents</a> &copy; 2016 &bull; All rights reserved.
+					<br>
+					
+						Proudly published with <a href="https://github.com/jekyll/jekyll" class="h6" target="_blank">Jekyll</a> using <a href="https://github.com/ozgrozer/dasper" class="h6" target="_blank">Dasper</a> theme.
+					
+
+				</div><!-- .dtc -->
+
+			</div><!-- .dt -->
+
+		</section><!-- section -->
+
+	</footer><!-- footer -->
+
+	<!-- If googleAnalyticsId declared -->
+	
+
+</body>
+</html>

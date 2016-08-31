@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="de" itemscope itemtype="http://schema.org/WebPage">
+<head>
+
+	<!-- SEO -->
+	<title>Backup Script überarbeitet</title>
+	<meta name="description" content="Vor einigen Tagen habe ich über das Backup meines uberspace Acounts gesprochen, ich habe mich dazu entschieden das Backup Script noch einmal etwas zu ">
+
+	<!-- Meta for robots -->
+	<meta charset="UTF-8">
+	<meta name="revisit-after" content="1 days">
+	<meta name="robots" content="index, follow">
+	<meta name="author" content="Raphael">
+	<meta name="generator" content="Jekyll v3.2.1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<!-- Google+ -->
+	<meta itemprop="name" content="Backup Script überarbeitet">
+	<meta itemprop="description" content="Vor einigen Tagen habe ich über das Backup meines uberspace Acounts gesprochen, ich habe mich dazu entschieden das Backup Script noch einmal etwas zu ">
+
+	<!-- Open Graph(Facebook, Pinterest) -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="/backup-script-uberarbeitet">
+	<meta property="og:title" content="Backup Script überarbeitet">
+	<meta property="og:locale" content="de">
+	<meta property="og:site_name" content="codegents">
+	<meta property="og:description" content="Vor einigen Tagen habe ich über das Backup meines uberspace Acounts gesprochen, ich habe mich dazu entschieden das Backup Script noch einmal etwas zu ">
+
+	<!-- Twitter -->
+	<meta name="twitter:title" content="Backup Script überarbeitet">
+	<meta name="twitter:site" content="codegents">
+	<meta name="twitter:url" content="/backup-script-uberarbeitet">
+	<meta name="twitter:creator" content="Raphael">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:description" content="Vor einigen Tagen habe ich über das Backup meines uberspace Acounts gesprochen, ich habe mich dazu entschieden das Backup Script noch einmal etwas zu ">
+
+	<!-- If article has a cover photo -->
+	
+
+	<!-- iOS web app -->
+	<meta name="format-detection" content="telephone=yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="Backup Script überarbeitet">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<!-- Search engine verifications -->
+	
+	
+	
+
+	<!-- Favicon & RSS -->
+	<link rel="icon" href="/assets/img/favicon.ico">
+	<link rel="alternate" type="application/rss+xml" title="codegents" href="/rss.xml">
+
+	<!-- CSS & JS files -->
+	<link rel="stylesheet" href="/assets/css/prod/style.min.css">
+	<script src="/assets/js/prod/prism.min.js"></script>
+	<script src="/assets/js/prod/fastclick.min.js"></script>
+	<script src="/assets/js/prod/init.min.js"></script>
+
+</head>
+<body>
+
+	<!-- Header -->
+	<header>
+
+		<!-- Header container -->
+		<section>
+
+			<!-- Homepage -->
+			<a href=""><i class="icon-home"></i></a>
+
+			<!-- Site name & description -->
+			<div>
+
+				<!-- Display: table -->
+				<div class="dt">
+
+					<!-- Display: table-cell -->
+					<div class="dtc">
+
+						<h3>codegents</h3>
+						<h6>serious business</h6>
+
+					</div><!-- .dtc -->
+
+				</div><!-- .dt -->
+
+			</div><!-- div -->
+
+			<!-- Mail -->
+			<a href="mailto:info@raphaelmutschler.de"><i class="icon-envelope-o"></i></a>
+
+		</section><!-- section -->
+
+	</header><!-- header -->
+
+	<!-- Main -->
+	<main>
+
+		<!-- Main container -->
+		<section>
+
+			<!-- Content -->
+			<!-- Article -->
+<article class="noBorder">
+
+	<!-- Article title -->
+	<h1>Backup Script überarbeitet</h1>
+
+	<!-- Article date -->
+	<span class="article__date">
+		
+			08 MAY 2014
+		
+	</span>
+
+	<!-- Article description -->
+	<section><p>Vor einigen Tagen habe ich über das <a href="http://blog.raphaelmutschler.de/uberspace-backup-auf-synology-diskstation/">Backup meines uberspace Acounts</a> gesprochen, ich habe mich dazu entschieden das Backup Script noch einmal etwas zu überarbeiten.</p>
+
+<p>Ich habe einige Zusätzliche Variablen eingeführt, automatisches erstellen des Backup Ordners (falls nicht vorhanden), Speicherplatz Check sowie Backup Rotation und symlink des aktuellsten Backups auf den <code class="highlighter-rouge">latest</code> Ordner.</p>
+
+<p>Backups werden nun in Ordnern mit dem ISO-8601 Datum gesichert (2014-05-08) außerdem werden die Backups nun Inkrementell vorgenommen, so dass ich bis zu 14 Tage zurück gehen kann, sollte das nötig sein, dabei werden symlinks auf Dateien gesetzt welche sich nicht geändert haben um Platz zu sparen.</p>
+
+<p>Das neue Skript erzeugt nun Backups in dieser Form:</p>
+
+<figure class="highlight"><pre><code class="language-shell" data-lang="shell">ls -la /volume1/Backup/server.uberspace.de/
+  2014-05-08
+  2014-05-07
+  2014-05-06
+  backup.log
+  latest -&gt; /volume1/Backup/server.uberspace.de/2014-05-08</code></pre></figure>
+
+<h2 id="die-variablen">Die Variablen:</h2>
+<p>Ich denke die Server Settings sollten weitgehend klar sein…</p>
+
+<p><code class="highlighter-rouge">SERVER</code> wird nun auch für den lokalen/backup Ordner Namen verwendet<br />
+<code class="highlighter-rouge">DAY0</code> dabei handelt es sich um das AKTUELLE Datum im ISO-8601 Format<br />
+<code class="highlighter-rouge">DAY1</code> ist das Datum vom vorheringen Tag (für die symlinks)<br />
+<code class="highlighter-rouge">DAY_MAY</code> Datum des ältesten Backups (wird gelöscht wenn vorhanden)<br />
+<code class="highlighter-rouge">RSYNC</code> der link zum rsync binary, kann an unterschiedlichen orten sein<br />
+<code class="highlighter-rouge">GB_FREE</code> Wie viel freier Speicherplatz mindestens vorhanden sein muss um das Backup zu starten (in GB)</p>
+
+<h2 id="das-neue-script">Das neue Script</h2>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/sh</span>
+
+<span class="c">#server settings</span>
+<span class="nv">USER</span><span class="o">=</span><span class="s2">"username"</span>
+<span class="nv">SERVER</span><span class="o">=</span><span class="s2">"server.uberspace.de"</span>
+<span class="nv">PORT</span><span class="o">=</span><span class="s2">"22"</span>
+<span class="nv">SSHID</span><span class="o">=</span><span class="s2">"/volume1/homes/backup/.ssh/id_rsa"</span>
+<span class="nv">SOURCE</span><span class="o">=</span><span class="s2">"/var/www/virtual/username/html :/mysqlbackup/latest/username"</span>
+
+<span class="c">#binarys</span>
+<span class="nv">RSYNC</span><span class="o">=</span><span class="s2">"/usr/syno/bin/rsync"</span>
+<span class="nv">AWK</span><span class="o">=</span><span class="s2">"/usr/bin/awk"</span>
+<span class="nv">LN</span><span class="o">=</span><span class="s2">"/bin/ln"</span>
+<span class="nv">DATE</span><span class="o">=</span><span class="s2">"/opt/bin/date"</span>
+
+<span class="c">#lokale variablen</span>
+<span class="c">#Heutiges Datum im ISO-8601 Format</span>
+<span class="nv">DAY0</span><span class="o">=</span><span class="sb">`</span><span class="nv">$DATE</span> -I<span class="sb">`</span>
+<span class="c">#Datum von gestern</span>
+<span class="nv">DAY1</span><span class="o">=</span><span class="sb">`</span><span class="nv">$DATE</span> -I -d <span class="s2">"1 day ago"</span><span class="sb">`</span>
+<span class="c">#maximales backup</span>
+<span class="nv">DAY_MAX</span><span class="o">=</span><span class="sb">`</span><span class="nv">$DATE</span> -I -d <span class="s2">"14 days ago"</span><span class="sb">`</span>
+<span class="nv">BACKUP_DRIVE</span><span class="o">=</span><span class="s2">"/volume1/Backup"</span>
+<span class="nv">BACKUP_FOLDER</span><span class="o">=</span><span class="s2">"</span><span class="nv">$BACKUP_DRIVE</span><span class="s2">/</span><span class="nv">$SERVER</span><span class="s2">"</span>
+<span class="nv">TARGET</span><span class="o">=</span><span class="s2">"</span><span class="nv">$BACKUP_FOLDER</span><span class="s2">/</span><span class="nv">$DAY0</span><span class="s2">"</span>
+<span class="nv">LNK</span><span class="o">=</span><span class="s2">"</span><span class="nv">$BACKUP_FOLDER</span><span class="s2">/</span><span class="nv">$DAY1</span><span class="s2">"</span>
+<span class="nv">LOG</span><span class="o">=</span><span class="s2">"</span><span class="nv">$BACKUP_FOLDER</span><span class="s2">/backup.log"</span>
+<span class="c">#mindestens x GB frei</span>
+<span class="nv">GB_FREE</span><span class="o">=</span><span class="s2">"100"</span>
+
+
+<span class="c">#check ob genug noch platz auf der platte ist</span>
+<span class="nv">HDMINFREE</span><span class="o">=</span><span class="k">$((</span><span class="nv">$GB_FREE</span> <span class="o">*</span> <span class="m">1024</span> <span class="o">*</span> <span class="m">1024</span><span class="k">))</span>
+<span class="nv">KBISFREE</span><span class="o">=</span><span class="k">$(</span>df <span class="nv">$BACKUP_DRIVE</span> | tail -n1 | <span class="nv">$AWK</span> <span class="s1">'{print $4}'</span><span class="k">)</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$KBISFREE</span> -lt <span class="nv">$HDMINFREE</span> <span class="o">]</span> ; <span class="k">then
+	</span><span class="nb">echo</span> <span class="s2">"Fatal: Not enough space left for rsyncing backups!"</span> &gt;&gt; <span class="nv">$LOG</span>
+	<span class="nb">exit
+</span><span class="k">fi</span>
+
+<span class="c">#schau ob backup folder vorhanden ist wenn nicht wird er angelegt</span>
+<span class="k">if</span> <span class="o">[</span> ! -e <span class="nv">$BACKUP_FOLDER</span> <span class="o">]</span>; <span class="k">then
+	</span>mkdir <span class="nv">$BACKUP_FOLDER</span>
+<span class="k">fi</span>
+
+<span class="nv">$RSYNC</span> -avz --delete --progress --link-dest<span class="o">=</span><span class="s2">"</span><span class="nv">$LNK</span><span class="s2">"</span> -e <span class="s2">"ssh -p </span><span class="nv">$PORT</span><span class="s2"> -i </span><span class="nv">$SSHID</span><span class="s2">"</span> <span class="nv">$USER</span>@<span class="nv">$SERVER</span>:<span class="nv">$SOURCE</span> <span class="nv">$TARGET</span> &gt;&gt; <span class="nv">$LOG</span> 2&gt;&amp;1
+
+<span class="c">#symlink latest auf heutiges datum</span>
+<span class="k">if</span> <span class="o">[</span> -d <span class="nv">$BACKUP_FOLDER</span>/<span class="nv">$DAY0</span> <span class="o">]</span>; <span class="k">then</span>
+	<span class="nv">$LN</span> -sfn <span class="nv">$TARGET</span> <span class="nv">$BACKUP_FOLDER</span>/latest
+<span class="k">fi</span>
+
+<span class="c">#loeschen des aeltesten Backups</span>
+<span class="k">if</span> <span class="o">[</span> -d <span class="nv">$BACKUP_FOLDER</span>/<span class="nv">$DAY_MAX</span> <span class="o">]</span>; <span class="k">then
+	</span>rm -rf <span class="nv">$BACKUP_FOLDER</span>/<span class="nv">$DAY_MAX</span>
+<span class="k">fi</span></code></pre></figure>
+
+</section>
+
+</article><!-- article -->
+
+<!-- If addthisId declared -->
+
+
+<!-- If disqusUsername declared -->
+
+
+	<!-- Full width -->
+	<div class="full">
+
+		<!-- Disqus -->
+		<div id="disqus_thread" class="mt mb"></div>
+		<script async src="//codegents.disqus.com/embed.js"></script>
+
+	</div><!-- .full -->
+
+
+
+
+		</section><!-- section -->
+
+	</main><!-- main -->
+
+	<!-- Footer -->
+	<footer>
+
+		<!-- Footer container -->
+		<section>
+
+			<!-- Display: table -->
+			<div class="dt">
+
+				<!-- Display: table-cell -->
+				<div class="dtc h6">
+
+					<!-- Copyright -->
+					<a href="" class="h6">codegents</a> &copy; 2016 &bull; All rights reserved.
+					<br>
+					
+						Proudly published with <a href="https://github.com/jekyll/jekyll" class="h6" target="_blank">Jekyll</a> using <a href="https://github.com/ozgrozer/dasper" class="h6" target="_blank">Dasper</a> theme.
+					
+
+				</div><!-- .dtc -->
+
+			</div><!-- .dt -->
+
+		</section><!-- section -->
+
+	</footer><!-- footer -->
+
+	<!-- If googleAnalyticsId declared -->
+	
+
+</body>
+</html>

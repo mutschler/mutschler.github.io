@@ -1,0 +1,31 @@
+---
+layout: post
+title: plexivity 0.9
+date: 2014-10-28 16:02:46.000000000 +01:00
+---
+plexivity Version 0.9 bzw. 0.9.1 ist raus und kann verwendet werden, momentan sitze ich gerade an der Hue anbindung so dass bei gewissen aktionen das Licht entsprechend gesteuert werden kann.
+
+Ich bin mir noch nicht sicher welche Funktionen da genau Sinn machen momentan sieht es wohl so aus als würde es einige "einfache" vorgefertige Funktionen geben, welche dann ausgewählt werden können und auf längere Sicht eine "erweitere Einstellungen" Option bei der mann dann komplett eigene Befehle ausführen kann.
+
+0.9 ist das erste "öffentliche" Release und beinhaltet noch den ein oder anderen kleineren Fehler, welche ich aber im laufe der Zeit noch beheben werde, so wie einige versteckte Funktionen und Einstellungen ;)
+
+Nun aber genug gelabert, hier die Features und einige Bilder:
+
+### 0.9
+* Setup Guide welcher durch das Setup führt
+* locale Unterstützung [übersetzen helfen auf transifex](https://www.transifex.com/projects/p/plexivity/)
+* Top 10 Charts (Alle, Serien, Filme, Episoden)
+* Media Infos (Serie, Staffel, Episode, Film)
+* start, stop, pause, resume Notifications (boxcar2, pushbullet, pushover, email)
+* Voll anpassbare Benachrichtigungsmeldungen (siehe unten)
+* Statistik (Wiedergaben nach Monat, Tag und Stunde)
+* Verlaufs Ansicht (wer hat wann wo was gesehen)
+* Cache funktion für Bilder
+
+Changelog gibts hier http://dev.raphaelmutschler.de/plexivity/changelog.html
+
+![stats](/content/images/2014/Oct/image_manager__full_size_plexivity_stats_01.png)
+
+![charts](/content/images/2014/Oct/charts.png)
+
+![ios screens](/content/images/2014/Oct/plexivity_ios.png)

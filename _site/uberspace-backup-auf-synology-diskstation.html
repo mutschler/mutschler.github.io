@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="de" itemscope itemtype="http://schema.org/WebPage">
+<head>
+
+	<!-- SEO -->
+	<title>Uberspace Backup auf Synology DiskStation</title>
+	<meta name="description" content="Vor einiger Zeit habe ich mir einen uberspace Account gegönnt, hauptsächlich als testing Server für diversere kleinere Projekte. Heute wollte ich mich">
+
+	<!-- Meta for robots -->
+	<meta charset="UTF-8">
+	<meta name="revisit-after" content="1 days">
+	<meta name="robots" content="index, follow">
+	<meta name="author" content="Raphael">
+	<meta name="generator" content="Jekyll v3.2.1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<!-- Google+ -->
+	<meta itemprop="name" content="Uberspace Backup auf Synology DiskStation">
+	<meta itemprop="description" content="Vor einiger Zeit habe ich mir einen uberspace Account gegönnt, hauptsächlich als testing Server für diversere kleinere Projekte. Heute wollte ich mich">
+
+	<!-- Open Graph(Facebook, Pinterest) -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="/uberspace-backup-auf-synology-diskstation">
+	<meta property="og:title" content="Uberspace Backup auf Synology DiskStation">
+	<meta property="og:locale" content="de">
+	<meta property="og:site_name" content="codegents">
+	<meta property="og:description" content="Vor einiger Zeit habe ich mir einen uberspace Account gegönnt, hauptsächlich als testing Server für diversere kleinere Projekte. Heute wollte ich mich">
+
+	<!-- Twitter -->
+	<meta name="twitter:title" content="Uberspace Backup auf Synology DiskStation">
+	<meta name="twitter:site" content="codegents">
+	<meta name="twitter:url" content="/uberspace-backup-auf-synology-diskstation">
+	<meta name="twitter:creator" content="Raphael">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:description" content="Vor einiger Zeit habe ich mir einen uberspace Account gegönnt, hauptsächlich als testing Server für diversere kleinere Projekte. Heute wollte ich mich">
+
+	<!-- If article has a cover photo -->
+	
+
+	<!-- iOS web app -->
+	<meta name="format-detection" content="telephone=yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="Uberspace Backup auf Synology DiskStation">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<!-- Search engine verifications -->
+	
+	
+	
+
+	<!-- Favicon & RSS -->
+	<link rel="icon" href="/assets/img/favicon.ico">
+	<link rel="alternate" type="application/rss+xml" title="codegents" href="/rss.xml">
+
+	<!-- CSS & JS files -->
+	<link rel="stylesheet" href="/assets/css/prod/style.min.css">
+	<script src="/assets/js/prod/prism.min.js"></script>
+	<script src="/assets/js/prod/fastclick.min.js"></script>
+	<script src="/assets/js/prod/init.min.js"></script>
+
+</head>
+<body>
+
+	<!-- Header -->
+	<header>
+
+		<!-- Header container -->
+		<section>
+
+			<!-- Homepage -->
+			<a href=""><i class="icon-home"></i></a>
+
+			<!-- Site name & description -->
+			<div>
+
+				<!-- Display: table -->
+				<div class="dt">
+
+					<!-- Display: table-cell -->
+					<div class="dtc">
+
+						<h3>codegents</h3>
+						<h6>serious business</h6>
+
+					</div><!-- .dtc -->
+
+				</div><!-- .dt -->
+
+			</div><!-- div -->
+
+			<!-- Mail -->
+			<a href="mailto:info@raphaelmutschler.de"><i class="icon-envelope-o"></i></a>
+
+		</section><!-- section -->
+
+	</header><!-- header -->
+
+	<!-- Main -->
+	<main>
+
+		<!-- Main container -->
+		<section>
+
+			<!-- Content -->
+			<!-- Article -->
+<article class="noBorder">
+
+	<!-- Article title -->
+	<h1>Uberspace Backup auf Synology DiskStation</h1>
+
+	<!-- Article date -->
+	<span class="article__date">
+		
+			06 MAY 2014
+		
+	</span>
+
+	<!-- Article description -->
+	<section><p>Vor einiger Zeit habe ich mir einen <a href="https://uberspace.de">uberspace</a> Account gegönnt, hauptsächlich als testing Server für diversere kleinere Projekte. Heute wollte ich mich mal daran machen die Backups für meinen Account einzurichten. Es gibt zwar bereits eine – meiner Meinung nach – sehr gute integrierte Backup lösung bei der man sich um nichts kümmern muss, aber ich wollte dennoch auch ein lokales Backup auf meiner DiskStation haben.</p>
+
+<p>Da ich bereits einen Backup-User habe (für andere Server etc.) habe ich mich dazu entschieden diesen auch hier zu verwenden. Theoretisch könnte dazu auch der admin account verwendet werden… aber da bin ich immer etwas… übervorsichtig.</p>
+
+<p>Die vorbereitungen sind eigentlich recht einfach:</p>
+
+<p>Per ssh auf die DiskStation verbinden, einen Key erstellen und copieren</p>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext">ssh backup@DISKSTATION_IP
+ssh-keygen -t rsa -C "meine@mail.de"
+cat ~/.ssh/id_rsa.pub</code></pre></figure>
+
+<p>den angezeigten Key dann dem überspace account hinzufügen und man sollte ohne probleme eine verbindung zum uberspace server herstellen können:</p>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext">ssh user@server.uberspace.de</code></pre></figure>
+
+<p>das hat schon mal funktioniert, als nächstes habe ich ein neues Verzeichnis auf meiner Backup Partition angelegt in welches ich in zukunft die Dateien sichern will…</p>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext">mkdir /volume1/Backups/server.uberspace.de/</code></pre></figure>
+
+<p>dann habe ich mir ein kleines script zusammen gebaut, welches sich per ssh zum uberspace server verbindet und das ganze dann per rsync in das ausgewählte verzeichnis sichert.</p>
+
+<p>Dabei habe ich mich dazu entschieden auch jeweils den aktuellsten mysqldumt mit zu sichern, sicher ist sicher… wer weis vielleicht will ich das ganze ja wirklich mal als eine art “offline mirror” betreiben, dazu ist es auf jeden Fall nicht verkehrt auch die Datenbanken mit zu sichern…</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c">#!/bin/sh</span>
+<span class="nv">USER</span><span class="o">=</span><span class="s2">"username"</span>
+<span class="nv">SERVER</span><span class="o">=</span><span class="s2">"server.uberspace.de"</span>
+<span class="nv">PORT</span><span class="o">=</span><span class="s2">"22"</span>
+<span class="nv">SSHID</span><span class="o">=</span><span class="s2">"/volume1/homes/backup/.ssh/id_rsa"</span>
+<span class="nv">SOURCE</span><span class="o">=</span><span class="s2">"/var/www/virtual/username/html :/mysqlbackup/latest/username"</span>
+<span class="nv">TARGET</span><span class="o">=</span><span class="s2">"/volume1/Backups/server.uberspace.de/"</span>
+<span class="nv">LOG</span><span class="o">=</span><span class="s2">"/volume1/Backups/server.uberspace.de/backup.log"</span>
+
+/usr/syno/bin/rsync -avz --delete --progress -e <span class="s2">"ssh -p </span><span class="nv">$PORT</span><span class="s2"> -i </span><span class="nv">$SSHID</span><span class="s2">"</span> <span class="nv">$USER</span>@<span class="nv">$SERVER</span>:<span class="nv">$SOURCE</span> <span class="nv">$TARGET</span> &gt;&gt; <span class="nv">$LOG</span> 2&gt;&amp;1</code></pre></figure>
+
+<p>bei <code class="highlighter-rouge">SOURCE</code> habe ich 2 Verzeichnisse angegeben (trennung der Verzeichnisse durch <code class="highlighter-rouge">:</code>) welche ich sichern möchte, das ist zum einen der html ordner (enthält die website) und der symlink zum letzten mysqlbackup</p>
+
+<p>Zum Schluss noch im DSM eingeloggt und unter <code class="highlighter-rouge">Systemsteuerung &gt; Aufgabenplaner</code> einen Task angelegt und das wars auch schon.</p>
+
+<p>Der Grund wieso ich das Backup von der DS aus ziehe und nicht vom uberspace server aus auf die DS schiebe, ist der selbe aus dem uberspace die eigenen Backups auch in dieser Art durchführt… sollte jemals durch irgend welche umstände irgend jemand zugriff auf meinen uberspace account haben, ist mein Backup sicher. Von uberspace aus gibt es darauf keinerlei zugriff!</p>
+</section>
+
+</article><!-- article -->
+
+<!-- If addthisId declared -->
+
+
+<!-- If disqusUsername declared -->
+
+
+	<!-- Full width -->
+	<div class="full">
+
+		<!-- Disqus -->
+		<div id="disqus_thread" class="mt mb"></div>
+		<script async src="//codegents.disqus.com/embed.js"></script>
+
+	</div><!-- .full -->
+
+
+
+
+		</section><!-- section -->
+
+	</main><!-- main -->
+
+	<!-- Footer -->
+	<footer>
+
+		<!-- Footer container -->
+		<section>
+
+			<!-- Display: table -->
+			<div class="dt">
+
+				<!-- Display: table-cell -->
+				<div class="dtc h6">
+
+					<!-- Copyright -->
+					<a href="" class="h6">codegents</a> &copy; 2016 &bull; All rights reserved.
+					<br>
+					
+						Proudly published with <a href="https://github.com/jekyll/jekyll" class="h6" target="_blank">Jekyll</a> using <a href="https://github.com/ozgrozer/dasper" class="h6" target="_blank">Dasper</a> theme.
+					
+
+				</div><!-- .dtc -->
+
+			</div><!-- .dt -->
+
+		</section><!-- section -->
+
+	</footer><!-- footer -->
+
+	<!-- If googleAnalyticsId declared -->
+	
+
+</body>
+</html>

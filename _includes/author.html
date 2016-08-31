@@ -1,0 +1,6 @@
+<div class="author">
+	<img src="{% if page.email %}{{ page.email | to_gravatar }}{% else %}{{ site.email | to_gravatar }}{% endif %}" class="gravatar" style="border-radius: 50%"/>
+	<p>
+		<b>{% if page.author %}{{page.author}}{% else %}{{site.author}}{% endif %}</b>
+	</p>
+</div>

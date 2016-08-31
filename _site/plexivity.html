@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="de" itemscope itemtype="http://schema.org/WebPage">
+<head>
+
+	<!-- SEO -->
+	<title>plexivity</title>
+	<meta name="description" content="Vor einiger Zeit habe ich mich entschlossen von XBMC auf Plex umzusteigen. Hauptsächlich weil ich die getrennte Server/Client Umgebung ziemlich gut fi">
+
+	<!-- Meta for robots -->
+	<meta charset="UTF-8">
+	<meta name="revisit-after" content="1 days">
+	<meta name="robots" content="index, follow">
+	<meta name="author" content="Raphael">
+	<meta name="generator" content="Jekyll v3.2.1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<!-- Google+ -->
+	<meta itemprop="name" content="plexivity">
+	<meta itemprop="description" content="Vor einiger Zeit habe ich mich entschlossen von XBMC auf Plex umzusteigen. Hauptsächlich weil ich die getrennte Server/Client Umgebung ziemlich gut fi">
+
+	<!-- Open Graph(Facebook, Pinterest) -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="/plexivity">
+	<meta property="og:title" content="plexivity">
+	<meta property="og:locale" content="de">
+	<meta property="og:site_name" content="codegents">
+	<meta property="og:description" content="Vor einiger Zeit habe ich mich entschlossen von XBMC auf Plex umzusteigen. Hauptsächlich weil ich die getrennte Server/Client Umgebung ziemlich gut fi">
+
+	<!-- Twitter -->
+	<meta name="twitter:title" content="plexivity">
+	<meta name="twitter:site" content="codegents">
+	<meta name="twitter:url" content="/plexivity">
+	<meta name="twitter:creator" content="Raphael">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:description" content="Vor einiger Zeit habe ich mich entschlossen von XBMC auf Plex umzusteigen. Hauptsächlich weil ich die getrennte Server/Client Umgebung ziemlich gut fi">
+
+	<!-- If article has a cover photo -->
+	
+
+	<!-- iOS web app -->
+	<meta name="format-detection" content="telephone=yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="plexivity">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<!-- Search engine verifications -->
+	
+	
+	
+
+	<!-- Favicon & RSS -->
+	<link rel="icon" href="/assets/img/favicon.ico">
+	<link rel="alternate" type="application/rss+xml" title="codegents" href="/rss.xml">
+
+	<!-- CSS & JS files -->
+	<link rel="stylesheet" href="/assets/css/prod/style.min.css">
+	<script src="/assets/js/prod/prism.min.js"></script>
+	<script src="/assets/js/prod/fastclick.min.js"></script>
+	<script src="/assets/js/prod/init.min.js"></script>
+
+</head>
+<body>
+
+	<!-- Header -->
+	<header>
+
+		<!-- Header container -->
+		<section>
+
+			<!-- Homepage -->
+			<a href=""><i class="icon-home"></i></a>
+
+			<!-- Site name & description -->
+			<div>
+
+				<!-- Display: table -->
+				<div class="dt">
+
+					<!-- Display: table-cell -->
+					<div class="dtc">
+
+						<h3>codegents</h3>
+						<h6>serious business</h6>
+
+					</div><!-- .dtc -->
+
+				</div><!-- .dt -->
+
+			</div><!-- div -->
+
+			<!-- Mail -->
+			<a href="mailto:info@raphaelmutschler.de"><i class="icon-envelope-o"></i></a>
+
+		</section><!-- section -->
+
+	</header><!-- header -->
+
+	<!-- Main -->
+	<main>
+
+		<!-- Main container -->
+		<section>
+
+			<!-- Content -->
+			<!-- Article -->
+<article class="noBorder">
+
+	<!-- Article title -->
+	<h1>plexivity</h1>
+
+	<!-- Article date -->
+	<span class="article__date">
+		
+			06 OCTOBER 2014
+		
+	</span>
+
+	<!-- Article description -->
+	<section><p>Vor einiger Zeit habe ich mich entschlossen von <a href="http://xbmc.org/">XBMC</a> auf <a href="https://plex.tv/">Plex</a> umzusteigen. Hauptsächlich weil ich die getrennte Server/Client Umgebung ziemlich gut finde. Der Plex Media Server läuft direkt auf meiner DS1513+ und sendet die Infos an mehrere Clients (MacBook, Mac Mini, iPhone, iPad und Raspberry) so dass ich ohne Probleme im Schlafzimmer auf dem MacBook ein Film anfangen und im Wohnzimmer über den Rasperry mit <a href="http://www.rasplex.com/">RasPlex</a> zu ende sehen kann.</p>
+
+<p>Plex bietet auserdem die Möglichkeit über ein Webinterface die Media Daten direkt im Browser wieder zu geben, was relativ nützlich ist wenn man mal für längere Zeit nicht zuhause ist und oder die Letzen Urlaubs Videos/Bilder mit Freunden und Familie teilen will.</p>
+
+<p>Nun bin ich jedoch ein kleiner Statistik “Freak” und da muss ich ehrlich zugeben fehlt mir persöhnlich bei Plex noch ein bisschen was. Es gibt zwar eine Seite welche die Aktuellen wiedergaben anzeigt, das wars dann aber auch schon so ziemlich. Ich würde allerdings gerne (direkt) wissen wenn jemand etwas von meinem Plex Server streamt, alleine schon aus dem Grund weil dadurch sowohl meine Internet Leitung als auch die Leistung meiner DS beeinträchtigt wird.</p>
+
+<p>Eine kurze Suche im Internet hat mich auf <a href="https://github.com/ljunkie/plexWatch/">plexWatch</a> gebracht, welches ich recht interessant fand, allerdings dank einiger abhängigkeiten nicht ohne weiteres (stichwort debian chroot) auf der DS läuft.Also habe ich mich dazu entschlossen meine eigenen Lösung zu schreiben: plexivity (Plex-activity)</p>
+
+<p><img src="/content/images/2014/Oct/plexivity.jpg" alt="plexivity Login Screen" /></p>
+
+<p>plexivity ist eine Flask App die in einem gewissen Intervall das Plex Web API abfragt und bei laufender Wiedergabe eine Push Nachricht über Pushover, Boxcar, Pushbullet oder per E-Mail sendet.</p>
+
+<p><img src="/content/images/2014/Oct/plexivity_stats_01.png" alt="plexivity Statistik" />
+Desweiteren gibt es einen Verlauf, Statistiken, Benutzer auflistung und Charts der angesehenen Medien.</p>
+
+<p>plexivity befindet sich momentan noch in der Entwicklung ein Link folgt ;)</p>
+</section>
+
+</article><!-- article -->
+
+<!-- If addthisId declared -->
+
+
+<!-- If disqusUsername declared -->
+
+
+	<!-- Full width -->
+	<div class="full">
+
+		<!-- Disqus -->
+		<div id="disqus_thread" class="mt mb"></div>
+		<script async src="//codegents.disqus.com/embed.js"></script>
+
+	</div><!-- .full -->
+
+
+
+
+		</section><!-- section -->
+
+	</main><!-- main -->
+
+	<!-- Footer -->
+	<footer>
+
+		<!-- Footer container -->
+		<section>
+
+			<!-- Display: table -->
+			<div class="dt">
+
+				<!-- Display: table-cell -->
+				<div class="dtc h6">
+
+					<!-- Copyright -->
+					<a href="" class="h6">codegents</a> &copy; 2016 &bull; All rights reserved.
+					<br>
+					
+						Proudly published with <a href="https://github.com/jekyll/jekyll" class="h6" target="_blank">Jekyll</a> using <a href="https://github.com/ozgrozer/dasper" class="h6" target="_blank">Dasper</a> theme.
+					
+
+				</div><!-- .dtc -->
+
+			</div><!-- .dt -->
+
+		</section><!-- section -->
+
+	</footer><!-- footer -->
+
+	<!-- If googleAnalyticsId declared -->
+	
+
+</body>
+</html>

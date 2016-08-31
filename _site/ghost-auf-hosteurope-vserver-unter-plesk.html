@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="de" itemscope itemtype="http://schema.org/WebPage">
+<head>
+
+	<!-- SEO -->
+	<title>Ghost auf Hosteurope vServer unter Plesk</title>
+	<meta name="description" content="Nach langem rum gefummel ist es mir nun endlich doch noch gelungen Ghost auf meinem Hosteurope vServer zum laufen zu bringen…
+
+Dazu war allerdings ein">
+
+	<!-- Meta for robots -->
+	<meta charset="UTF-8">
+	<meta name="revisit-after" content="1 days">
+	<meta name="robots" content="index, follow">
+	<meta name="author" content="Raphael">
+	<meta name="generator" content="Jekyll v3.2.1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<!-- Google+ -->
+	<meta itemprop="name" content="Ghost auf Hosteurope vServer unter Plesk">
+	<meta itemprop="description" content="Nach langem rum gefummel ist es mir nun endlich doch noch gelungen Ghost auf meinem Hosteurope vServer zum laufen zu bringen…
+
+Dazu war allerdings ein">
+
+	<!-- Open Graph(Facebook, Pinterest) -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="/ghost-auf-hosteurope-vserver-unter-plesk">
+	<meta property="og:title" content="Ghost auf Hosteurope vServer unter Plesk">
+	<meta property="og:locale" content="de">
+	<meta property="og:site_name" content="codegents">
+	<meta property="og:description" content="Nach langem rum gefummel ist es mir nun endlich doch noch gelungen Ghost auf meinem Hosteurope vServer zum laufen zu bringen…
+
+Dazu war allerdings ein">
+
+	<!-- Twitter -->
+	<meta name="twitter:title" content="Ghost auf Hosteurope vServer unter Plesk">
+	<meta name="twitter:site" content="codegents">
+	<meta name="twitter:url" content="/ghost-auf-hosteurope-vserver-unter-plesk">
+	<meta name="twitter:creator" content="Raphael">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:description" content="Nach langem rum gefummel ist es mir nun endlich doch noch gelungen Ghost auf meinem Hosteurope vServer zum laufen zu bringen…
+
+Dazu war allerdings ein">
+
+	<!-- If article has a cover photo -->
+	
+
+	<!-- iOS web app -->
+	<meta name="format-detection" content="telephone=yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="Ghost auf Hosteurope vServer unter Plesk">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<!-- Search engine verifications -->
+	
+	
+	
+
+	<!-- Favicon & RSS -->
+	<link rel="icon" href="/assets/img/favicon.ico">
+	<link rel="alternate" type="application/rss+xml" title="codegents" href="/rss.xml">
+
+	<!-- CSS & JS files -->
+	<link rel="stylesheet" href="/assets/css/prod/style.min.css">
+	<script src="/assets/js/prod/prism.min.js"></script>
+	<script src="/assets/js/prod/fastclick.min.js"></script>
+	<script src="/assets/js/prod/init.min.js"></script>
+
+</head>
+<body>
+
+	<!-- Header -->
+	<header>
+
+		<!-- Header container -->
+		<section>
+
+			<!-- Homepage -->
+			<a href=""><i class="icon-home"></i></a>
+
+			<!-- Site name & description -->
+			<div>
+
+				<!-- Display: table -->
+				<div class="dt">
+
+					<!-- Display: table-cell -->
+					<div class="dtc">
+
+						<h3>codegents</h3>
+						<h6>serious business</h6>
+
+					</div><!-- .dtc -->
+
+				</div><!-- .dt -->
+
+			</div><!-- div -->
+
+			<!-- Mail -->
+			<a href="mailto:info@raphaelmutschler.de"><i class="icon-envelope-o"></i></a>
+
+		</section><!-- section -->
+
+	</header><!-- header -->
+
+	<!-- Main -->
+	<main>
+
+		<!-- Main container -->
+		<section>
+
+			<!-- Content -->
+			<!-- Article -->
+<article class="noBorder">
+
+	<!-- Article title -->
+	<h1>Ghost auf Hosteurope vServer unter Plesk</h1>
+
+	<!-- Article date -->
+	<span class="article__date">
+		
+			06 MAY 2014
+		
+	</span>
+
+	<!-- Article description -->
+	<section><p>Nach langem rum gefummel ist es mir nun endlich doch noch gelungen <a href="http://ghost.org">Ghost</a> auf meinem Hosteurope vServer zum laufen zu bringen…</p>
+
+<p>Dazu war allerdings einiges an try and error nötig, hier eine kurze zusammenfassung/anleitung wie es dann schlussendlich doch noch geklappt hat. Wie man sieht, hab ich das ganze als subdomain unter blog.raphaelmutschler.de laufen, die domain dazu wurde natürlich vorher in Plesk angelegt.</p>
+
+<h2 id="nodejs-installieren">Node.js installieren</h2>
+<p>als erstes muss mal node.js installiert werden und genau da gehts schon los… ein <code class="highlighter-rouge">apt-get install nodejs</code> gibt nämlich lediglich die meldung “Couldn’t find package nodejs” aus. Das war wohl nichts. Bleiben zwei möglichkeiten:</p>
+
+<ol>
+  <li>Nodejs source code runterladen und auf dem server selbst compilieren</li>
+  <li>ein repository adden welches node packages hat (da hosteurope das wohl nicht mit liefert…)</li>
+</ol>
+
+<p>Ich habe mich für den zweiten schritt entscheiden, aus dem einfachen Grund weils schneller geht, man lebt ja schließlich nicht ewig ;)</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo apt-get update
+sudo apt-get install python-software-properties
+sudo add-apt-repository ppa:chris-lea/node.js
+sudo apt-get update
+sudo apt-get install nodejs</code></pre></figure>
+
+<p>noch schnell mit <code class="highlighter-rouge">node -v</code> und <code class="highlighter-rouge">npm -v</code> die versionen gecheckt und weiter gehts!</p>
+
+<h2 id="ghost-installieren">Ghost installieren</h2>
+
+<p>nachdem nun alles soweit vorbereitet ist kann auch Ghost installiert werden (ich hab das ganze ins user verzeichnis installiert, es kann aber genauso gut das www dir benutzt werden), das hat sogar relativ gut geklappt:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">curl -L https://ghost.org/zip/ghost-latest.zip -o ghost.zip
+unzip -uo ghost.zip -d ghost
+<span class="nb">cd </span>ghost
+npm install --production</code></pre></figure>
+
+<p>noch schnell die <code class="highlighter-rouge">config.example.js</code> nach <code class="highlighter-rouge">config.js</code> kopiert und entsprechend angepasst. Dabei ist zu erwähnen dass ich die dort eine feste IP eingetragen habe (sollte aber mit 0.0.0.0 auch funktionieren) meine config datei sieht jedenfalls so aus:</p>
+
+<figure class="highlight"><pre><code class="language-markup" data-lang="markup">production: {
+    url: 'http://blog.raphaelmutschler.de',
+    mail: {},
+    database: {
+        client: 'sqlite3',
+        connection: {
+            filename: path.join(__dirname, '/content/data/ghost.db')
+        },
+        debug: false
+    },
+    server: {
+        host: 'MEINEIP',
+        port: 'XXXX'
+    }
+},</code></pre></figure>
+
+<p><code class="highlighter-rouge">npm start --production</code> in die console gehauen und das ding startet. YEAH! Denkste… Ghost ist nun aber immerhin schon einmal unter <code class="highlighter-rouge">MEINEIP:XXXX</code> zu erreichen… also weiter gehts.</p>
+
+<h2 id="vhost-einrichten">vHost einrichten</h2>
+<p>Hier wirds etwas tricky da Plesk absolut wiederlich ist sobald man etwas selbst ändern und/oder einstellen/installieren will was nicht von haus aus mit kommt und/oder über Plesk gemacht werden kann. Zum Glück gibt es die möglichkeit eine vhost.conf in die Plesk konfiguration des vHosts rein laden zu lassen. Nur wo muss die vhost.conf hin?</p>
+
+<p>die File struktur ist ja in etwa so:</p>
+
+<figure class="highlight"><pre><code class="language-markup" data-lang="markup">/var/www/vhosts/
+  |- raphaelmutschler.de
+    |- etc
+    |- conf
+    |- httpdocs
+    |- subdomains
+      |- blog.raphaelmutschler.de
+        |- conf
+        |- httpdocs</code></pre></figure>
+
+<p>nun liegen die vHost config files aber nicht unter  <code class="highlighter-rouge">/var/www/vhosts/raphaelmutschler.de/subdomains/blog.raphaelmutschler.de/conf/</code>
+sondern in <code class="highlighter-rouge">/var/www/vhosts/blog.raphaelmutschler.de/conf/</code></p>
+
+<p>also im zuletzt genannten Verzeichniss eine <code class="highlighter-rouge">vhost.conf</code> erstellen und mit inhalt füllen:</p>
+
+<figure class="highlight"><pre><code class="language-apacheconf" data-lang="apacheconf">ProxyRequests off
+ProxyPass / http://MEINEIP:XXXX/
+ProxyPassReverse / http://MEINEIP:XXXX/</code></pre></figure>
+
+<p>unter normalen umständen wäre das ganze noch in einem <code class="highlighter-rouge">&lt;VirtualHost *:80&gt;</code> verschachtelt und auch <code class="highlighter-rouge">ServerName</code> und <code class="highlighter-rouge">ServerAlias</code> würden angegeben werden. Da das ganze aber später in eine von Plesk verwaltete config includiert wird, würde das im nächsten Punkt nur für unnötige Fehler sorgen.</p>
+
+<p>Nun muss Plesk noch mitgeteilt werden, dass wir manuell an der config rum gebastelt haben und er sich die Daten doch bitte neu laden soll:
+<code class="highlighter-rouge">/usr/local/psa/admin/bin/httpdmng --reconfigure-domain DOMAINNAME</code>
+leider bringt im anschluss der Aufruf der URL blog.raphaelmutschler.de lediglich einen Fehler (403):
+&gt; Forbidden You don’t have permission to access / on this server.</p>
+
+<h2 id="module-aktiveren">Module aktiveren</h2>
+
+<p>Der Fehler der beim Aufruf der URL angezeigt wird kommt daher, dass das Apache Modul proxy nicht geladen ist:</p>
+
+<figure class="highlight"><pre><code class="language-apacheconf" data-lang="apacheconf">a2enmod proxy
+a2enmod proxy_http</code></pre></figure>
+
+<p>das zweite Modul am besten direkt mit aktivieren das spart einem die lästige Fehler suche wenn aus dem 403er ein 500er Fehler wird…</p>
+
+<p>nun muss auch noch die config datei des Prox Mods bearbeitet werden: <code class="highlighter-rouge">/etc/apache2/mods-enabled/proxy.conf</code></p>
+
+<figure class="highlight"><pre><code class="language-apacheconf" data-lang="apacheconf">&lt;IfModule mod_proxy.c&gt;
+  ProxyRequests Off
+
+  &lt;Proxy *&gt;
+    AddDefaultCharset off
+    Order deny, allow
+    Allow from all
+  &lt;/Proxy&gt;
+
+  ProxyVia On
+&lt;/IfModule&gt;  </code></pre></figure>
+
+<p>Eigentlich muss nur aus <code class="highlighter-rouge">Deny from all</code> ein <code class="highlighter-rouge">Allow from all</code> gemacht werden…</p>
+
+<p>diesmal reicht auch ein <code class="highlighter-rouge">service apache2 restart</code> aus um den apache mit den soeben aktivieren modulen neu zu starten und siehe da: es geht!</p>
+
+<h2 id="forever-and-ever-and-ever">forever and ever and ever…</h2>
+<p>Doof ist nur dass das ganze sofort wieder abschmiert sobald man die ssh verbindung zum server trennt… dafür gibt es 2 möglichkeiten:</p>
+
+<ol>
+  <li>das ganze per screen session laufen lassen</li>
+  <li>per npm forever installieren und das nutzen</li>
+</ol>
+
+<p>Der erste Fall ist relativ schnell gehandhabt <code class="highlighter-rouge">screen npm start --production</code> und schon wars das… Wichtig ist lediglich das <code class="highlighter-rouge">--production</code> nicht zu vergessen, da das ganze sonst im development mode läuft.</p>
+
+<p>Variante 2 besteht auch lediglich aus zwei zeilen code und ist mir persöhnlich etwas lieber:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">sudo npm install forever -g
+<span class="nv">NODE_ENV</span><span class="o">=</span>production forever start index.js</code></pre></figure>
+
+<p>Dabei wird <code class="highlighter-rouge">--production</code> automatisch über <code class="highlighter-rouge">NODE_ENV</code> gesetzt und das ganze im hintergrund ausgeführt.</p>
+
+<p>Wichtig dabei ist dass im home verzeichnis des nutzers der ordner <code class="highlighter-rouge">.forever</code> existiert und dort auch schreib rechte für den benutzer vorhanden sind.</p>
+
+<p>Alles in allem hab ich etwas mehr als 45 Minuten daran gesessen wobei die meiste Zeit dafür drauf ging Fehlerquellen zu finden und zu beheben. Ich hoffe dass ich dem ein oder anderen damit ein paar Minuten schenken konnte.</p>
+</section>
+
+</article><!-- article -->
+
+<!-- If addthisId declared -->
+
+
+<!-- If disqusUsername declared -->
+
+
+	<!-- Full width -->
+	<div class="full">
+
+		<!-- Disqus -->
+		<div id="disqus_thread" class="mt mb"></div>
+		<script async src="//codegents.disqus.com/embed.js"></script>
+
+	</div><!-- .full -->
+
+
+
+
+		</section><!-- section -->
+
+	</main><!-- main -->
+
+	<!-- Footer -->
+	<footer>
+
+		<!-- Footer container -->
+		<section>
+
+			<!-- Display: table -->
+			<div class="dt">
+
+				<!-- Display: table-cell -->
+				<div class="dtc h6">
+
+					<!-- Copyright -->
+					<a href="" class="h6">codegents</a> &copy; 2016 &bull; All rights reserved.
+					<br>
+					
+						Proudly published with <a href="https://github.com/jekyll/jekyll" class="h6" target="_blank">Jekyll</a> using <a href="https://github.com/ozgrozer/dasper" class="h6" target="_blank">Dasper</a> theme.
+					
+
+				</div><!-- .dtc -->
+
+			</div><!-- .dt -->
+
+		</section><!-- section -->
+
+	</footer><!-- footer -->
+
+	<!-- If googleAnalyticsId declared -->
+	
+
+</body>
+</html>

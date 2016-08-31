@@ -1,0 +1,40 @@
+# Website details
+name: "codegents"
+description: "serious business"
+email: "info@raphaelmutschler.de"
+author: "Raphael"
+lang: "de"
+locale: "de"
+
+# Jekyll
+paginate: 10
+highlighter: ""
+markdown: kramdown
+gems: [jekyll-paginate]
+timezone: Europe/Berlin
+paginateLabel: page
+paginate_path: "page/:num"
+# permalink: /:year/:month/:day/:title
+permalink: /:title
+baseurl: ""
+coverPhoto: /content/images/2014/may/codegents-header_03.png
+
+# Includes
+addthisId: ""
+disqusUsername: "codegents"
+googleAnalyticsId: ""
+
+# Search engine verifications
+bing: ""
+yandex: ""
+google: ""
+
+#Sitemap
+sitemap:
+    file: "/sitemap.xml"
+    exclude:
+        - "/404.html"
+    include_posts:
+        - "/index.html"
+    change_frequency_name: "daily"
+    priority_name: "1.00"

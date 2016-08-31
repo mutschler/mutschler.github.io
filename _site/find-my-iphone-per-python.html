@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="de" itemscope itemtype="http://schema.org/WebPage">
+<head>
+
+	<!-- SEO -->
+	<title>Find my iPhone per python</title>
+	<meta name="description" content="Ich bastel ab und zu immer mal wieder an meinem Raspberry rum. Zuletzt habe ich mir einen Funk transmitter gekauft, welcher in Zukunft einige Lampen i">
+
+	<!-- Meta for robots -->
+	<meta charset="UTF-8">
+	<meta name="revisit-after" content="1 days">
+	<meta name="robots" content="index, follow">
+	<meta name="author" content="Raphael">
+	<meta name="generator" content="Jekyll v3.2.1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<!-- Google+ -->
+	<meta itemprop="name" content="Find my iPhone per python">
+	<meta itemprop="description" content="Ich bastel ab und zu immer mal wieder an meinem Raspberry rum. Zuletzt habe ich mir einen Funk transmitter gekauft, welcher in Zukunft einige Lampen i">
+
+	<!-- Open Graph(Facebook, Pinterest) -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="/find-my-iphone-per-python">
+	<meta property="og:title" content="Find my iPhone per python">
+	<meta property="og:locale" content="de">
+	<meta property="og:site_name" content="codegents">
+	<meta property="og:description" content="Ich bastel ab und zu immer mal wieder an meinem Raspberry rum. Zuletzt habe ich mir einen Funk transmitter gekauft, welcher in Zukunft einige Lampen i">
+
+	<!-- Twitter -->
+	<meta name="twitter:title" content="Find my iPhone per python">
+	<meta name="twitter:site" content="codegents">
+	<meta name="twitter:url" content="/find-my-iphone-per-python">
+	<meta name="twitter:creator" content="Raphael">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:description" content="Ich bastel ab und zu immer mal wieder an meinem Raspberry rum. Zuletzt habe ich mir einen Funk transmitter gekauft, welcher in Zukunft einige Lampen i">
+
+	<!-- If article has a cover photo -->
+	
+
+	<!-- iOS web app -->
+	<meta name="format-detection" content="telephone=yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="Find my iPhone per python">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<!-- Search engine verifications -->
+	
+	
+	
+
+	<!-- Favicon & RSS -->
+	<link rel="icon" href="/assets/img/favicon.ico">
+	<link rel="alternate" type="application/rss+xml" title="codegents" href="/rss.xml">
+
+	<!-- CSS & JS files -->
+	<link rel="stylesheet" href="/assets/css/prod/style.min.css">
+	<script src="/assets/js/prod/prism.min.js"></script>
+	<script src="/assets/js/prod/fastclick.min.js"></script>
+	<script src="/assets/js/prod/init.min.js"></script>
+
+</head>
+<body>
+
+	<!-- Header -->
+	<header>
+
+		<!-- Header container -->
+		<section>
+
+			<!-- Homepage -->
+			<a href=""><i class="icon-home"></i></a>
+
+			<!-- Site name & description -->
+			<div>
+
+				<!-- Display: table -->
+				<div class="dt">
+
+					<!-- Display: table-cell -->
+					<div class="dtc">
+
+						<h3>codegents</h3>
+						<h6>serious business</h6>
+
+					</div><!-- .dtc -->
+
+				</div><!-- .dt -->
+
+			</div><!-- div -->
+
+			<!-- Mail -->
+			<a href="mailto:info@raphaelmutschler.de"><i class="icon-envelope-o"></i></a>
+
+		</section><!-- section -->
+
+	</header><!-- header -->
+
+	<!-- Main -->
+	<main>
+
+		<!-- Main container -->
+		<section>
+
+			<!-- Content -->
+			<!-- Article -->
+<article class="noBorder">
+
+	<!-- Article title -->
+	<h1>Find my iPhone per python</h1>
+
+	<!-- Article date -->
+	<span class="article__date">
+		
+			13 MAY 2014
+		
+	</span>
+
+	<!-- Article description -->
+	<section><p>Ich bastel ab und zu immer mal wieder an meinem Raspberry rum. Zuletzt habe ich mir einen Funk transmitter gekauft, welcher in Zukunft einige Lampen in meiner Wohung steuern wird. Funk Thermostate sind auch schon verbaut und werden wohl das nächste Projekt werden.</p>
+
+<p>Ich habe schon vor längerer Zeit angefangen mit der Idee zu spielen möglichst vieles zu Automatisieren bzw per PC und/oder Smartphone zu steuern. Der erste Schritt den ich in dieser Richtung unternommen habe, damals noch an einem alten Mac Mini, war wenn ich von der Arbeit nach Hause komme automatisch eine entsprechende Playlist in iTunes zu starten sowie meine einige meiner Lieblingsseiten/Feeds nach News zu durchsuchen die für mich Interessant sind.</p>
+
+<p>Dazu habe ich mir damals einen haufen Skripte zusammen gebaut und war lange auf der Suche nach einer geeigneten Schnittstelle für die Automatische erkennung wann ich zuhause bin und wann nicht.</p>
+
+<p>Ich hab mit Latitude von Google experimentiert ebenso wie mit einigen anderen Location Diensten deren Namen ich schon längst wieder vergessen habe.</p>
+
+<p>Bis mir einviel, dass Apple mit Find my iPhone ja eigentlich schon alles bietet was man braucht, WENN es doch nur ein API gäbe. Leider konnte ich dazu nichts finden was funktioniert hätte, daher habe ich mich kurzerhand hingesetzt und meine eigene Library dafür gebastelt.</p>
+
+<h2 id="findmyi">FindMyI</h2>
+<p>FindMyI ist mein ansatz per python zugriff auf den iCloud Lokalisierungsdienst des eigenen iDevices zu bekommen.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">findmyi</span> <span class="kn">import</span> <span class="n">FMI</span>
+
+<span class="n">finder</span> <span class="o">=</span> <span class="n">FMI</span><span class="p">(</span> <span class="s">"yourmail@me.com"</span><span class="p">,</span> <span class="s">"PASSWORD"</span> <span class="p">)</span>
+<span class="n">finder</span><span class="o">.</span><span class="n">updateDevice</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">deviceNum</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">finder</span><span class="o">.</span><span class="n">devices</span><span class="p">)):</span>
+    <span class="k">print</span> <span class="n">finder</span><span class="o">.</span><span class="n">devices</span><span class="p">[</span><span class="n">deviceNum</span><span class="p">]</span></code></pre></figure>
+
+<p>gibt in etwa das hier zurück:</p>
+
+<figure class="highlight"><pre><code class="language-json" data-lang="json"><span class="p">{</span><span class="w">
+	</span><span class="err">'displayName':</span><span class="w"> </span><span class="err">u'iPad',</span><span class="w">
+	</span><span class="err">'name':</span><span class="w"> </span><span class="err">u'Huntsman',</span><span class="w">
+	</span><span class="err">'battery':</span><span class="w"> </span><span class="err">0.0,</span><span class="w">
+	</span><span class="err">'model':</span><span class="w"> </span><span class="err">u'ThirdGen-white',</span><span class="w">
+	</span><span class="err">'id':</span><span class="w"> </span><span class="err">u'DEVICEIDGOESHERe',</span><span class="w">
+	</span><span class="err">'latitude':</span><span class="w"> </span><span class="err">52.1348086086,</span><span class="w">
+	</span><span class="err">'longitude':</span><span class="w"> </span><span class="err">6.20540518,</span><span class="w">
+	</span><span class="err">'accuracy':</span><span class="w"> </span><span class="err">100.0,</span><span class="w">
+	</span><span class="err">'positionType':</span><span class="w"> </span><span class="err">u'Wifi',</span><span class="w">
+	</span><span class="err">'updateTime':</span><span class="w"> </span><span class="err">1375958135394</span><span class="w">
+</span><span class="p">}</span></code></pre></figure>
+
+<p>per latitude / longitude und etwas geoCoding kann dann relativ schnell auch die Position bestimmt werden. Bei mir war das ganze damals so eingestellt das sobald ich mich in einem Radius von 20 Metern um meine Adresse befand das Script weitere Scripte aufgerufen hat.</p>
+
+<p>Später wurde das ganze dann erweitert um entsprechende Einstellungen wenn ich weiter als 10km weg bin etc.</p>
+
+<p>In Zukunft werde ich das ganze aber wohl nicht mehr für die “bin ich Zuhause” Funktionalität nutzen (dazu ist es einfach zu ungenau) dafür aber z.B. für einige andere Sachen:</p>
+
+<ul>
+  <li>wenn ich über einen Längeren Zeitraum nicht im Umkreis von 500 Metern von zuhause war könnte man die Heizung noch weiter herunter fahren etc.</li>
+  <li>Ich bin bereits seit 5 Tagen nicht zuhause gewesen, dann wird Abends mal für einige Stunden das Licht angeschaltet (um den eindruck zu erwecken ich wäre Zuhause)</li>
+</ul>
+
+<p>und so weiter und so fort… eigentlich ist so ziemlich alles möglich was nur entfernt mir meiner Position zu tun hat.</p>
+
+<p>Wens Interessiert, das ganze hat noch einige weitere optionen wie zb Senden einer Nachricht, Sperren und/oder fern löschen des Gerätes… Auch wenn ich letzteres nie ausprobiert habe.</p>
+
+<p>Den Code gibts auf <a href="https://bitbucket.org/raphaelmutschler/fmi">Bitbucket</a></p>
+
+<p>oder per pip / easy_install (https://pypi.python.org/pypi/findmyi/0.2)</p>
+
+<figure class="highlight"><pre><code class="language-plaintext" data-lang="plaintext">pip install findmyi</code></pre></figure>
+
+</section>
+
+</article><!-- article -->
+
+<!-- If addthisId declared -->
+
+
+<!-- If disqusUsername declared -->
+
+
+	<!-- Full width -->
+	<div class="full">
+
+		<!-- Disqus -->
+		<div id="disqus_thread" class="mt mb"></div>
+		<script async src="//codegents.disqus.com/embed.js"></script>
+
+	</div><!-- .full -->
+
+
+
+
+		</section><!-- section -->
+
+	</main><!-- main -->
+
+	<!-- Footer -->
+	<footer>
+
+		<!-- Footer container -->
+		<section>
+
+			<!-- Display: table -->
+			<div class="dt">
+
+				<!-- Display: table-cell -->
+				<div class="dtc h6">
+
+					<!-- Copyright -->
+					<a href="" class="h6">codegents</a> &copy; 2016 &bull; All rights reserved.
+					<br>
+					
+						Proudly published with <a href="https://github.com/jekyll/jekyll" class="h6" target="_blank">Jekyll</a> using <a href="https://github.com/ozgrozer/dasper" class="h6" target="_blank">Dasper</a> theme.
+					
+
+				</div><!-- .dtc -->
+
+			</div><!-- .dt -->
+
+		</section><!-- section -->
+
+	</footer><!-- footer -->
+
+	<!-- If googleAnalyticsId declared -->
+	
+
+</body>
+</html>

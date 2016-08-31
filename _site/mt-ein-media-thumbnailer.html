@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="de" itemscope itemtype="http://schema.org/WebPage">
+<head>
+
+	<!-- SEO -->
+	<title>mt: ein Media Thumbnailer</title>
+	<meta name="description" content="Ich war schon länger auf der Suche nach einem Tool dass mir Kontaktabzüge von Videos machen kann. Da schwirren ja bereits so einige rum, aber wenn man">
+
+	<!-- Meta for robots -->
+	<meta charset="UTF-8">
+	<meta name="revisit-after" content="1 days">
+	<meta name="robots" content="index, follow">
+	<meta name="author" content="Raphael">
+	<meta name="generator" content="Jekyll v3.2.1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<!-- Google+ -->
+	<meta itemprop="name" content="mt: ein Media Thumbnailer">
+	<meta itemprop="description" content="Ich war schon länger auf der Suche nach einem Tool dass mir Kontaktabzüge von Videos machen kann. Da schwirren ja bereits so einige rum, aber wenn man">
+
+	<!-- Open Graph(Facebook, Pinterest) -->
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="/mt-ein-media-thumbnailer">
+	<meta property="og:title" content="mt: ein Media Thumbnailer">
+	<meta property="og:locale" content="de">
+	<meta property="og:site_name" content="codegents">
+	<meta property="og:description" content="Ich war schon länger auf der Suche nach einem Tool dass mir Kontaktabzüge von Videos machen kann. Da schwirren ja bereits so einige rum, aber wenn man">
+
+	<!-- Twitter -->
+	<meta name="twitter:title" content="mt: ein Media Thumbnailer">
+	<meta name="twitter:site" content="codegents">
+	<meta name="twitter:url" content="/mt-ein-media-thumbnailer">
+	<meta name="twitter:creator" content="Raphael">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:description" content="Ich war schon länger auf der Suche nach einem Tool dass mir Kontaktabzüge von Videos machen kann. Da schwirren ja bereits so einige rum, aber wenn man">
+
+	<!-- If article has a cover photo -->
+	
+
+	<!-- iOS web app -->
+	<meta name="format-detection" content="telephone=yes">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="mt: ein Media Thumbnailer">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<!-- Search engine verifications -->
+	
+	
+	
+
+	<!-- Favicon & RSS -->
+	<link rel="icon" href="/assets/img/favicon.ico">
+	<link rel="alternate" type="application/rss+xml" title="codegents" href="/rss.xml">
+
+	<!-- CSS & JS files -->
+	<link rel="stylesheet" href="/assets/css/prod/style.min.css">
+	<script src="/assets/js/prod/prism.min.js"></script>
+	<script src="/assets/js/prod/fastclick.min.js"></script>
+	<script src="/assets/js/prod/init.min.js"></script>
+
+</head>
+<body>
+
+	<!-- Header -->
+	<header>
+
+		<!-- Header container -->
+		<section>
+
+			<!-- Homepage -->
+			<a href=""><i class="icon-home"></i></a>
+
+			<!-- Site name & description -->
+			<div>
+
+				<!-- Display: table -->
+				<div class="dt">
+
+					<!-- Display: table-cell -->
+					<div class="dtc">
+
+						<h3>codegents</h3>
+						<h6>serious business</h6>
+
+					</div><!-- .dtc -->
+
+				</div><!-- .dt -->
+
+			</div><!-- div -->
+
+			<!-- Mail -->
+			<a href="mailto:info@raphaelmutschler.de"><i class="icon-envelope-o"></i></a>
+
+		</section><!-- section -->
+
+	</header><!-- header -->
+
+	<!-- Main -->
+	<main>
+
+		<!-- Main container -->
+		<section>
+
+			<!-- Content -->
+			<!-- Article -->
+<article class="noBorder">
+
+	<!-- Article title -->
+	<h1>mt: ein Media Thumbnailer</h1>
+
+	<!-- Article date -->
+	<span class="article__date">
+		
+			18 JULY 2015
+		
+	</span>
+
+	<!-- Article description -->
+	<section><p>Ich war schon länger auf der Suche nach einem Tool dass mir Kontaktabzüge von Videos machen kann. Da schwirren ja bereits so einige rum, aber wenn man das ganze automatisiert und ohne GUI laufen lassen will, wirds dann schon deutlich schwieriger.</p>
+
+<h1 id="anforderungen">Anforderungen</h1>
+
+<p>Ich hatte eigentlich hauptsächlich 3 Anforderungen:</p>
+
+<ol>
+  <li>Sollte sowohl unter linux als auch auf meinem Mac laufen</li>
+  <li>Geschwindigkeit</li>
+  <li>mögliche Automatisierung/scripting</li>
+</ol>
+
+<p>Bisher habe ich dafür immer <a href="http://p.outlyer.net/vcs/">vcs</a> verwendet, das braucht aber einige abhängigkeiten (ImageMagick, ffmpeg) und arbeitet nur mit der GNU version von getopt welche am Mac nach installiert werden muss.</p>
+
+<h1 id="lsung">Lösung</h1>
+
+<p>Da ich schon seit längerem mit dem Gedanken spiele <a href="http://golang.com">go</a> zu lernen war das die Möglichkeit endlich damit anzufangen.</p>
+
+<p>Herausgekommen ist <a href="https://bitbucket.org/raphaelmutschler/mt/">mt</a> ein kleines tool das bis auf libavcodec keinerlei abhängigkeiten an 3rd Party Libraries stellt und relativ schnell und einfach auf alle möglichen Plattformen verteilt werden kann. Für meine DiskStation nutze ich ein static binary welches libavcodec bereits mit beinhaltet.</p>
+
+<h1 id="funktionen">Funktionen</h1>
+
+<p>Anfänglich konnte mt wirklich nur mit sehr reduziertem funktionsumfang aufwarten, mittlerweile habe ich diesen aber um einiges erweitert:</p>
+
+<ul>
+  <li>Kontaktabzüge oder einzel Bilder</li>
+  <li>Anzahl, Größe und Abstand der einzelnen Screenshots kann bestimmt werden</li>
+  <li>Farben für Header und Hintergrund können definiert werden</li>
+  <li>möglichkeit ein Wasserzeichen einzubinden</li>
+  <li>Logo oder ähnliches kann in den Header integriert werden</li>
+  <li>Schrift und Schriftgröße kann geändert werden</li>
+  <li>SW und Invert Filter für Bilder</li>
+</ul>
+
+<p>Im laufe der Zeit wird da sicher noch die ein oder andere Funktion dazu kommen.</p>
+</section>
+
+</article><!-- article -->
+
+<!-- If addthisId declared -->
+
+
+<!-- If disqusUsername declared -->
+
+
+	<!-- Full width -->
+	<div class="full">
+
+		<!-- Disqus -->
+		<div id="disqus_thread" class="mt mb"></div>
+		<script async src="//codegents.disqus.com/embed.js"></script>
+
+	</div><!-- .full -->
+
+
+
+
+		</section><!-- section -->
+
+	</main><!-- main -->
+
+	<!-- Footer -->
+	<footer>
+
+		<!-- Footer container -->
+		<section>
+
+			<!-- Display: table -->
+			<div class="dt">
+
+				<!-- Display: table-cell -->
+				<div class="dtc h6">
+
+					<!-- Copyright -->
+					<a href="" class="h6">codegents</a> &copy; 2016 &bull; All rights reserved.
+					<br>
+					
+						Proudly published with <a href="https://github.com/jekyll/jekyll" class="h6" target="_blank">Jekyll</a> using <a href="https://github.com/ozgrozer/dasper" class="h6" target="_blank">Dasper</a> theme.
+					
+
+				</div><!-- .dtc -->
+
+			</div><!-- .dt -->
+
+		</section><!-- section -->
+
+	</footer><!-- footer -->
+
+	<!-- If googleAnalyticsId declared -->
+	
+
+</body>
+</html>

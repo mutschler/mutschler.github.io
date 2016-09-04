@@ -16,7 +16,7 @@ paginateLabel: page
 paginate_path: "page/:num"
 # permalink: /:year/:month/:day/:title
 permalink: /:title
-baseurl: ""
+baseurl: "http://blog.raphaelmutschler.de/"
 coverPhoto: /content/images/2014/may/codegents-header_03.png
 
 # Includes

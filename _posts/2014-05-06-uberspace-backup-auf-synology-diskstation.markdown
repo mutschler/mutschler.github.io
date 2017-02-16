@@ -3,6 +3,11 @@ layout: post
 title: Uberspace Backup auf Synology DiskStation
 date: 2014-05-06 21:12:29.000000000 +02:00
 ---
+
+**UPDATE:** Eine überarbeitete Version des Backup-Scripts, gibt's [hier]({% link _posts/2014-05-08-backup-script-uberarbeitet.markdown %})
+
+**ACHTUNG** Ab DSM Version 6, können sich nur noch Benutzer per SSH anmelden, die der Bentuzergruppe `admin` angehören! Vielen Dank an [Klaus](http://blog.raphaelmutschler.de/uberspace-backup-auf-synology-diskstation#comment-3158262553) für den Hinweis.
+
 Vor einiger Zeit habe ich mir einen [uberspace](https://uberspace.de) Account gegönnt, hauptsächlich als testing Server für diversere kleinere Projekte. Heute wollte ich mich mal daran machen die Backups für meinen Account einzurichten. Es gibt zwar bereits eine – meiner Meinung nach – sehr gute integrierte Backup lösung bei der man sich um nichts kümmern muss, aber ich wollte dennoch auch ein lokales Backup auf meiner DiskStation haben.
 
 Da ich bereits einen Backup-User habe (für andere Server etc.) habe ich mich dazu entschieden diesen auch hier zu verwenden. Theoretisch könnte dazu auch der admin account verwendet werden... aber da bin ich immer etwas... übervorsichtig.
